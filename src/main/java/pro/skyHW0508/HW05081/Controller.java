@@ -15,21 +15,19 @@ public class Controller {
     }
 
     @GetMapping(path = "/login")
-    public String login(@RequestParam("login") String userLogin, @RequestParam("password") String userPassword) {
-        try {
-            return service.checkLogin(userLogin);
+    public String login(@RequestParam("login") String userLogin, @RequestParam("password") String userPassword,
+                        @RequestParam ("confirmPassword") String userConfirmPassword ) {
+        try {return service.checkPerson(userLogin, userPassword, userConfirmPassword);
+    } catch (WrongLoginException e ){
 
-        } catch (WrongLoginException e) {
-            System.out.println("Логин должен быть не больше 20 символов! ");
+        }finally {
+            return service.checkPerson(userLogin,userPassword, userConfirmPassword);
         }
-
-try {
-            return service.checkPassword(userPassword);
-        } catch (WrongPassException e){
-            return "Пароль должен быть строго меньше 20 символов! ";
         }
-    }
 }
+
+
+
 
 
 
