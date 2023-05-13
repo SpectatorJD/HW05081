@@ -17,8 +17,7 @@ public class Controller {
     @GetMapping(path = "/login")
     public String login(@RequestParam("login") String userLogin, @RequestParam("password") String userPassword,
                         @RequestParam ("confirmPassword") String userConfirmPassword ) {
-        try {
-            return "";
+        try  {return service.checkPerson(userLogin, userPassword, userConfirmPassword);
         } catch (WrongLoginException | WrongPassException e) {
             e.printStackTrace();
             return " Введите корректные данные ";
